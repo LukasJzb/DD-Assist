@@ -1,7 +1,9 @@
 package com.hsworms_project.dd_assist
 
 import android.os.Bundle
+import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.material3.NavigationBar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -27,13 +29,12 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
-
     }
 
     private fun replaceFragment(fragment: Fragment) {
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.coordinatorLayout, fragment)
+        fragmentTransaction.replace(R.id.fragmentFrameLayout, fragment)
         fragmentTransaction.commit()
     }
 }

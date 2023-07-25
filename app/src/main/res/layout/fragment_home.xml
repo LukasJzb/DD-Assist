@@ -4,13 +4,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
-    tools:context=".HomeFragment" >
+    android:orientation="vertical"
+    tools:context=".HomeFragment">
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="352dp"
-        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
         android:src="@drawable/ic_launcher_foreground" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:insetLeft="50dp"
+        android:insetTop="20dp"
+        android:insetRight="50dp"
+        android:insetBottom="20dp"
+        android:text="Button" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:insetLeft="50dp"
+        android:insetTop="20dp"
+        android:insetRight="50dp"
+        android:insetBottom="20dp"
+        android:text="@string/settings" />
+
 </LinearLayout>
