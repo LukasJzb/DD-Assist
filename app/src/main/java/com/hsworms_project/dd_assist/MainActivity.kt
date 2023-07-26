@@ -17,7 +17,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val navView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         navView.background = null
-        navView.menu.getItem(2).isEnabled = false
         replaceFragment(HomeFragment())
 
         navView.setOnNavigationItemSelectedListener { item ->
