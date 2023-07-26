@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.miChar -> replaceFragment(CharFragment())
                 R.id.miNote -> replaceFragment(NoteFragment())
                 R.id.miDice -> replaceFragment(DiceFragment())
+                R.id.miSettings -> replaceFragment(SettingsFragment())
             }
             true
         }
