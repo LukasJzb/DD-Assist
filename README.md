@@ -1,6 +1,6 @@
 # DD-Assist
 
-This is a project about a assistent for Dragons & Dungeons. It will be our university project for the coruse "Development of mobile Applications".
+This is a project about a assistant for Dragons & Dungeons. It will be our university project for the course "Development of mobile Applications".
 
 Contributors:
 - Moritz Bayer
