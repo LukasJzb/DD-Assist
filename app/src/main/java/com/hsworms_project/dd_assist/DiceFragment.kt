@@ -5,6 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
+import android.widget.SpinnerAdapter
+import android.widget.Toast
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -23,19 +28,45 @@ class DiceFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+
     }
 
-    override fun onCreateView(
+    /*override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_dice, container, false)
+    }*/
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val dices = arrayOf("d4", "d6", "d8", "d10", "d12", "d20", "d100")
+        val t=inflater.inflate(R.layout.fragment_dice, container, false)
+        val spinner = t.findViewById<Spinner>(R.id.spinner2)
+        spinner?.adapter = ArrayAdapter(requireActivity().applicationContext, R.layout.dice_dropdown, dices) as SpinnerAdapter
+        spinner?.onItemSelectedListener = object :AdapterView.OnItemSelectedListener{
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                println("erreur")
+            }
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val type = parent?.getItemAtPosition(position).toString()
+                /*Toast.makeText(activity,type, Toast.LENGTH_LONG).show()
+                println(type)*/
+            }
+
+        }
+        return t
     }
+
+
 
     companion object {
         /**
@@ -56,4 +87,7 @@ class DiceFragment : Fragment() {
                 }
             }
     }
+
+
+
 }
