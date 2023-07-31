@@ -1,5 +1,6 @@
 package com.hsworms_project.dd_assist
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -16,6 +17,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlin.random.Random
 
 
+public var parentcontext: Context? = null
 class MainActivity : AppCompatActivity() {
 
     var wuerfel: Int = 0
@@ -25,6 +27,7 @@ class MainActivity : AppCompatActivity() {
         val navView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         navView.background = null
         replaceFragment(HomeFragment())
+        parentcontext = this
 
         navView.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
