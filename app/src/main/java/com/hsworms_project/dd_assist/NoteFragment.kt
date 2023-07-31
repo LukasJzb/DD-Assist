@@ -1,11 +1,20 @@
 package com.hsworms_project.dd_assist
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.preference.PreferenceManager
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.platform.ComposeView
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.room.Room
+import com.hsworms_project.dd_assist.classes.NoteViewmodel
+import com.hsworms_project.dd_assist.note_data.NoteDatabase
+import com.hsworms_project.dd_assist.note_data.NoteScreen
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -22,6 +31,23 @@ class NoteFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+
+    private val db by lazy {
+        Room.databaseBuilder(
+            requireActivity().applicationContext,
+            NoteDatabase::class.java,
+            "contacts.db"
+        ).build()
+    }
+    private val viewModel by viewModels<NoteViewmodel>(
+        factoryProducer = {
+            object : ViewModelProvider.Factory {
+                override fun <T : ViewModel> create(modelClass: Class<T>): T {
+                    return NoteViewmodel(db.dao) as T
+                }
+            }
+        }
+    )
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -33,9 +59,15 @@ class NoteFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_note, container, false)
+        //return inflater.inflate(R.layout.fragment_note, container, false)
+        return ComposeView(requireContext()).apply {
+            setContent {
+                val state by viewModel.state.collectAsState()
+                NoteScreen(state = state, onEvent = viewModel::onEvent)
+            }
+        }
     }
 /*    private fun loadSettings(){
         val sp = PreferenceManager.getDefaultSharedPreferences(requireContext())
