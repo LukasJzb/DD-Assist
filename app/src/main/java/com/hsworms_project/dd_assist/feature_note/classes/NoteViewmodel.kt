@@ -45,7 +45,7 @@ class NoteViewmodel(
                     dao.deleteNote(event.note)
                 }
             }
-            NoteEvent.HideDialog -> {
+            is NoteEvent.HideDialog -> {
                 _state.update { it.copy(
                     addingNote = false
                 ) }
@@ -53,9 +53,8 @@ class NoteViewmodel(
             NoteEvent.SaveNote -> {
                 val titel = state.value.titel
                 val inhalt = state.value.inhalt
-                val time = state.value.time
 
-                if(titel.isBlank() || inhalt.isBlank() || time == 0L) {
+                if(titel.isBlank() || inhalt.isBlank()) {
                     return
                 }
                 val note = Note(
@@ -90,7 +89,7 @@ class NoteViewmodel(
                     titel = event.titel
                 ) }
             }
-            NoteEvent.ShowDialog -> {
+            is NoteEvent.ShowDialog -> {
                 _state.update { it.copy(
                     addingNote = true
                 ) }

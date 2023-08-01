@@ -23,7 +23,8 @@
     android:layout_width="140dp"
     android:layout_height="37dp"
     android:ellipsize="marquee"
-    android:textColor="@color/white"
+    android:background="#FFFFFF"
     android:textSize="18sp"
+    android:textColor="@color/black"
     android:gravity="center"
     />
