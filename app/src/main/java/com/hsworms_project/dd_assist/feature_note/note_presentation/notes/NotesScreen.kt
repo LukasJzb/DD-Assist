@@ -117,7 +117,7 @@ fun NotesScreen (
                         note = note,
                         modifier = Modifier
                             .fillMaxWidth()
-                            .clickable { /* To Do*/ },
+                            .clickable { navController.navigate(Screen.AddEditNoteScrenn.route + "?noteId=${note.id}") },
                         onDeleteClick = {
                             vieModel.onEvent(NotesEvent.DeleteNote(note))
                             scope.launch { 

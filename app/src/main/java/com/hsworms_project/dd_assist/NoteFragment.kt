@@ -84,7 +84,6 @@ class NoteFragment : Fragment() {
                                     },
                                 )
                             ) {
-                                val color = it.arguments?.getInt("noteColor") ?: -1
                                 AddEditNoteScreen(
                                     navController = navController
                                 )
