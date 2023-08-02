@@ -4,17 +4,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.room.Room
-import com.hsworms_project.dd_assist.classes.NoteViewmodel
-import com.hsworms_project.dd_assist.note_data.NoteDatabase
-import com.hsworms_project.dd_assist.note_data.NoteScreen
+import androidx.navigation.NavType
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
+import com.hsworms_project.dd_assist.feature_note.note_presentation.add_edit_note.AddEditNoteScreen
+import com.hsworms_project.dd_assist.feature_note.note_presentation.note_util.Screen
+import com.hsworms_project.dd_assist.feature_note.note_presentation.notes.NotesScreen
+import com.hsworms_project.dd_assist.ui.theme.DDAssistTheme
+import dagger.hilt.android.AndroidEntryPoint
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,28 +30,14 @@ private const val ARG_PARAM2 = "param2"
  * Use the [NoteFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
+
 class NoteFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
 
 
-    private val db by lazy {
-        Room.databaseBuilder(
-            requireActivity().applicationContext,
-            NoteDatabase::class.java,
-            "contacts.db"
-        ).build()
-    }
-    private val viewModel by viewModels<NoteViewmodel>(
-        factoryProducer = {
-            object : ViewModelProvider.Factory {
-                override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                    return NoteViewmodel(db.dao) as T
-                }
-            }
-        }
-    )
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -64,8 +54,44 @@ class NoteFragment : Fragment() {
         //return inflater.inflate(R.layout.fragment_note, container, false)
         return ComposeView(requireContext()).apply {
             setContent {
-                val state by viewModel.state.collectAsState()
-                NoteScreen(state = state, onEvent = viewModel::onEvent)
+                DDAssistTheme {
+                    Surface(
+                        color = MaterialTheme.colorScheme.background
+                    ) {
+                        val navController = rememberNavController()
+                        NavHost(
+                            navController = navController,
+                            startDestination = Screen.NoteScreen.route
+                        ) {
+                            composable(route = Screen.NoteScreen.route) {
+                                NotesScreen(navController = navController)
+                            }
+                            composable(
+                                route = Screen.AddEditNoteScrenn.route +
+                                        "?noteId={noteId}",
+                                arguments = listOf(
+                                    navArgument(
+                                        name = "noteId"
+                                    ) {
+                                        type = NavType.IntType
+                                        defaultValue = -1
+                                    },
+                                    navArgument(
+                                        name = "noteColor"
+                                    ) {
+                                        type = NavType.IntType
+                                        defaultValue = -1
+                                    },
+                                )
+                            ) {
+                                val color = it.arguments?.getInt("noteColor") ?: -1
+                                AddEditNoteScreen(
+                                    navController = navController
+                                )
+                            }
+                        }
+                    }
+                }
             }
         }
     }
