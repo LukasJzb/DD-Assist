@@ -18,4 +18,12 @@
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
 
+    <string name="Wuerfelart">Würfelart: </string>
+    <string name="min1">-1</string>
+    <string name="min5">-5</string>
+    <string name="add1">+1</string>
+    <string name="add5">+5</string>
+    <string name="zero">0</string>
+    <string name="anzahl">Anzahl: </string>
+
 </resources>

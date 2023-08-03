@@ -1,51 +1,25 @@
 package com.hsworms_project.dd_assist
 
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
-import android.widget.FrameLayout
 import android.widget.Spinner
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.material3.NavigationBar
-import androidx.compose.ui.platform.debugInspectorInfo
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.preference.PreferenceManager
 import androidx.room.Room
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.hsworms_project.dd_assist.classes.NoteViewmodel
-import com.hsworms_project.dd_assist.note_data.NoteDatabase
+import dagger.hilt.android.AndroidEntryPoint
 import kotlin.random.Random
 
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     var wuerfel: Int = 0
-
-    public val db by lazy {
-        Room.databaseBuilder(
-            applicationContext,
-            NoteDatabase::class.java,
-            "notes.db"
-        ).build()
-    }
-
-    public val viewmodel1 by viewModels<NoteViewmodel>(
-        factoryProducer = {
-            object : ViewModelProvider.Factory{
-                override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                    return NoteViewmodel(db.dao) as T
-                }
-            }
-        }
-    )
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
