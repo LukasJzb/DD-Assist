@@ -6,7 +6,7 @@ import com.hsworms_project.dd_assist.classes.Note
 
 @Database(
     entities = [Note::class],
-    version = 2
+    version = 1
 )
 abstract class NoteDatabase: RoomDatabase() {
 

@@ -5,9 +5,11 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -35,7 +37,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.*
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
@@ -43,6 +46,8 @@ import com.hsworms_project.dd_assist.feature_note.note_presentation.note_util.Sc
 import com.hsworms_project.dd_assist.feature_note.note_presentation.notes.note_components.NoteItem
 import com.hsworms_project.dd_assist.feature_note.note_presentation.notes.note_components.OrderSection
 import kotlinx.coroutines.launch
+import com.hsworms_project.dd_assist.R
+import com.hsworms_project.dd_assist.ui.theme.whiteback
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -58,80 +63,90 @@ fun NotesScreen (
 
     Scaffold(
         floatingActionButton = {
-            FloatingActionButton(
-                onClick = { navController.navigate(Screen.AddEditNoteScrenn.route) },
-                Modifier.background(Color.Green)
-            ) {
-                Icon(imageVector = Icons.Default.Add, contentDescription = "Notiz hinzufügen")
-            }
-        },
-        topBar = {},
-        snackbarHost = { SnackbarHost(snackbarHostState)},
-
-    ) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(it)
-        ) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text(
-                    text = "Deine Notizen",
-                    style = MaterialTheme.typography.titleMedium
-                )
-                IconButton(
-                    onClick = {
-                        vieModel.onEvent(NotesEvent.ToggleOrderSection)
-                              },
-                    ) {
-                    Icon(
-                        imageVector = Icons.Default.List,
-                        contentDescription = "Sortiren"
-                    )
+                FloatingActionButton(
+                    containerColor = whiteback,
+                    onClick = { navController.navigate(Screen.AddEditNoteScrenn.route) }
+                ) {
+                    Icon(imageVector = Icons.Default.Add, contentDescription = "Notiz hinzufügen")
                 }
-            }
-            AnimatedVisibility(
-                visible = state.isOrderSectionVisable,
-                enter = fadeIn() + slideInVertically(),
-                exit = fadeOut() + slideOutVertically()
+            },
+            topBar = {},
+            snackbarHost = { SnackbarHost(snackbarHostState) }
+
+        ) {
+            Box {
+                Image(painterResource(id = R.drawable.background),
+                    contentDescription = "Hintergrundbild",
+                    contentScale = ContentScale.FillBounds,
+                    modifier = Modifier.matchParentSize())
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(it)
             ) {
-               OrderSection(
-                   modifier = Modifier
-                       .fillMaxWidth()
-                       .padding(vertical = 16.dp),
-                   noteOrder = state.noteOrder,
-                   onOrderChange = {
-                       vieModel.onEvent(NotesEvent.Order(it))
-                   }
-               )
-            }
-            Spacer(modifier = Modifier.height(16.dp))
-            LazyColumn(
-                modifier = Modifier.fillMaxSize()) {
-                items(state.notes) {note ->
-                    NoteItem(
-                        note = note,
+                Row(
+                    modifier = Modifier
+                        .background(whiteback)
+                        .fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = "Deine Notizen",
+                        style = MaterialTheme.typography.titleMedium
+                    )
+                    IconButton(
+                        onClick = {
+                            vieModel.onEvent(NotesEvent.ToggleOrderSection)
+                        },
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.List,
+                            contentDescription = "Sortiren"
+                        )
+                    }
+                }
+                AnimatedVisibility(
+                    visible = state.isOrderSectionVisable,
+                    enter = fadeIn() + slideInVertically(),
+                    exit = fadeOut() + slideOutVertically()
+                ) {
+                    OrderSection(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .clickable { navController.navigate(Screen.AddEditNoteScrenn.route + "?noteId=${note.id}") },
-                        onDeleteClick = {
-                            vieModel.onEvent(NotesEvent.DeleteNote(note))
-                            scope.launch { 
-                                val result = snackbarHostState.showSnackbar(
-                                    message = "Notiz gelöscht",
-                                    actionLabel = "Wiederherstellen"
-                                )
-                                if(result == SnackbarResult.ActionPerformed) {
-                                    vieModel.onEvent(NotesEvent.RestoreNote)
-                                }
-                            }
+                            .padding(vertical = 16.dp)
+                            .background(whiteback),
+                        noteOrder = state.noteOrder,
+                        onOrderChange = {
+                            vieModel.onEvent(NotesEvent.Order(it))
                         }
                     )
-                    Spacer(modifier = Modifier.height(16.dp))
+                }
+                Spacer(modifier = Modifier.height(16.dp))
+                LazyColumn(
+                    modifier = Modifier.fillMaxSize()
+                ) {
+                    items(state.notes) { note ->
+                        NoteItem(
+                            note = note,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clickable { navController.navigate(Screen.AddEditNoteScrenn.route + "?noteId=${note.id}") },
+                            onDeleteClick = {
+                                vieModel.onEvent(NotesEvent.DeleteNote(note))
+                                scope.launch {
+                                    val result = snackbarHostState.showSnackbar(
+                                        message = "Notiz gelöscht",
+                                        actionLabel = "Wiederherstellen"
+                                    )
+                                    if (result == SnackbarResult.ActionPerformed) {
+                                        vieModel.onEvent(NotesEvent.RestoreNote)
+                                    }
+                                }
+                            }
+                        )
+                        Spacer(modifier = Modifier.height(16.dp))
+                    }
                 }
             }
         }

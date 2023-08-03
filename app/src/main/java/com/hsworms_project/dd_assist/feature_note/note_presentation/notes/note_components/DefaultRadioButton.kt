@@ -28,8 +28,8 @@ fun DefaultRadioButton(
             selected = selected,
             onClick = onSelect,
             colors = RadioButtonDefaults.colors(
-                selectedColor = Color.Blue,
-                unselectedColor = Color.Gray
+                selectedColor = Color.Black,
+                unselectedColor = Color.DarkGray
             )
         )
         Spacer(modifier = Modifier.width(8.dp))

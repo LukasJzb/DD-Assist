@@ -1,15 +1,13 @@
 package com.hsworms_project.dd_assist
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
-import android.widget.SpinnerAdapter
-import android.widget.Toast
+import androidx.fragment.app.Fragment
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -50,16 +48,14 @@ class DiceFragment : Fragment() {
         val dices = arrayOf("d4", "d6", "d8", "d10", "d12", "d20", "d100")
         val t=inflater.inflate(R.layout.fragment_dice, container, false)
         val spinner = t.findViewById<Spinner>(R.id.spinner2)
-        spinner?.adapter = ArrayAdapter(requireActivity().applicationContext, R.layout.dice_dropdown, dices) as SpinnerAdapter
+        spinner?.adapter = ArrayAdapter(requireActivity().applicationContext, R.layout.dice_dropdown, dices)
         spinner?.onItemSelectedListener = object :AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 println("erreur")
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                val type = parent?.getItemAtPosition(position).toString()
-                /*Toast.makeText(activity,type, Toast.LENGTH_LONG).show()
-                println(type)*/
+                parent?.getItemAtPosition(position).toString()
             }
 
         }
@@ -87,7 +83,4 @@ class DiceFragment : Fragment() {
                 }
             }
     }
-
-
-
 }

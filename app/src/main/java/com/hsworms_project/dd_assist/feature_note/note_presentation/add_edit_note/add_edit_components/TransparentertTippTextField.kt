@@ -1,5 +1,6 @@
 package com.hsworms_project.dd_assist.feature_note.note_presentation.add_edit_note.add_edit_components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.BasicTextField
@@ -10,6 +11,7 @@ import androidx.compose.ui.focus.FocusState
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
+import com.hsworms_project.dd_assist.ui.theme.whiteback
 
 @Composable
 fun TransparentTippTextField (
@@ -32,6 +34,7 @@ fun TransparentTippTextField (
                 .onFocusChanged {
                     onFocusChange(it)
                 }
+                .background(whiteback)
         )
         if (istTippSichtbar) {
             Text(

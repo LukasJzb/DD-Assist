@@ -17,12 +17,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Paint
 import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.clipPath
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.hsworms_project.dd_assist.classes.Note
-import com.hsworms_project.dd_assist.feature_note.note_presentation.notes.NotesEvent
+import com.hsworms_project.dd_assist.ui.theme.whiteback
 
 @Composable
 fun NoteItem(
@@ -40,10 +42,9 @@ fun NoteItem(
             }
             clipPath(clipPath) {
                 drawRect(
-                    color = Color.LightGray,
+                    color = whiteback,
                     size = size
                 )
-
             }
         }
         Column(
@@ -54,7 +55,7 @@ fun NoteItem(
         ){
             Text(
                 text = note.titel,
-                style = MaterialTheme.typography.titleSmall,
+                style = MaterialTheme.typography.titleLarge,
                 color = Color.Black,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
@@ -62,7 +63,7 @@ fun NoteItem(
             Spacer(modifier = Modifier.height(8.dp))
             Text(
                 text = note.inhalt,
-                style = MaterialTheme.typography.bodySmall,
+                style = MaterialTheme.typography.bodyMedium,
                 color = Color.Black,
                 maxLines = 5,
                 overflow = TextOverflow.Ellipsis
@@ -75,7 +76,7 @@ fun NoteItem(
             Icon(
                 imageVector = Icons.Default.Delete,
                 contentDescription = "Notiz löschen",
-                tint = Color.Red
+                tint = Color.DarkGray
                 )
 
         }
