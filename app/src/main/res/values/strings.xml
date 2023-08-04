@@ -25,5 +25,13 @@
     <string name="add5">+5</string>
     <string name="zero">0</string>
     <string name="anzahl">Anzahl: </string>
+    <string name="races">Rassen</string>
+    <string name="classes">Klassen</string>
+    <string name="background">Hintergründe</string>
+    <string name="items">Gegenstände</string>
+    <string name="spells">Zauber</string>
+    <string name="feats">Talente</string>
+    <string name="monster">Monster</string>
+    <string name="fivee">5etools</string>
 
 </resources>

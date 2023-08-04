@@ -5,9 +5,9 @@
         android:title="Home"
         android:icon="@drawable/ic_home" />
 
-    <item android:id="@+id/miChar"
-        android:title="Char"
-        android:icon="@drawable/ic_person" />
+    <item android:id="@+id/miSearch"
+        android:title="Suche"
+        android:icon="@drawable/ic_action_search" />
 
     <item android:id="@+id/miNote"
         android:title="Note"

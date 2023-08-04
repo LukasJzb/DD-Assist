@@ -2,15 +2,13 @@ package com.hsworms_project.dd_assist
 
 import android.os.Bundle
 import android.view.View
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import android.widget.Button
 import android.widget.Spinner
 import android.widget.TextView
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.room.Room
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.random.Random
@@ -30,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         navView.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.miHome -> replaceFragment(HomeFragment())
-                R.id.miChar -> replaceFragment(CharFragment())
+                R.id.miSearch -> replaceFragment(CharFragment())
                 R.id.miNote -> replaceFragment(NoteFragment())
                 R.id.miDice -> {
                     replaceFragment(DiceFragment())
@@ -40,8 +38,6 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
-
-
     }
 
     private fun replaceFragment(fragment: Fragment) {
@@ -53,7 +49,6 @@ class MainActivity : AppCompatActivity() {
 
     /*Funktionalität des Dices Fragment*/
     fun dices(view: View) {
-
         val text = findViewById<TextView>(R.id.textView3)
         val bt1 = findViewById<Button>(R.id.button5)
         val bt2 = findViewById<Button>(R.id.button6)
@@ -113,4 +108,43 @@ class MainActivity : AppCompatActivity() {
         text.text = stringBuilder.toString()
     }
 
+    fun openWeb(view: View) {
+        val rasse = findViewById<Button>(R.id.btn_search_rasse)
+        val klasse = findViewById<Button>(R.id.btn_search_classes)
+        val backg = findViewById<Button>(R.id.btn_search_backgrpund)
+        val feat = findViewById<Button>(R.id.btn_search_feats)
+        val item = findViewById<Button>(R.id.btn_search_items)
+        val spell = findViewById<Button>(R.id.btn_search_speels)
+        val monster = findViewById<Button>(R.id.btn_search_monster)
+        val five = findViewById<Button>(R.id.btn_search_fivee)
+        val webView = findViewById<WebView>(R.id.wview_search)
+
+        webView.settings.javaScriptEnabled = true
+        webView.webViewClient = WebViewClient()
+
+        if (view == rasse) {
+            webView.loadUrl("https://5e.tools/races.html#aarakocra_dmg")
+        }
+        else if(view == klasse){
+            webView.loadUrl("https://5e.tools/classes.html#artificer_tce")
+        }
+        else if(view == backg) {
+            webView.loadUrl("https://5e.tools/backgrounds.html#acolyte_phb")
+        }
+        else if(view == feat) {
+            webView.loadUrl("https://5e.tools/feats.html#aberrant%20dragonmark_erlw")
+        }
+        else if(view == item) {
+            webView.loadUrl("https://5e.tools/items.html#abacus_phb")
+        }
+        else if(view == spell) {
+            webView.loadUrl("https://5e.tools/spells.html#absorb%20elements_xge")
+        }
+        else if(view == monster) {
+            webView.loadUrl("https://5e.tools/bestiary.html#aarakocra_mm")
+        }
+        else if(view == five) {
+            webView.loadUrl("https://5e.tools/")
+        }
+    }
 }

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CharFragment"
+    android:background="@drawable/background">
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <Button
+                android:id="@+id/btn_search_rasse"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="openWeb"
+                android:text="@string/races" />
+
+            <Button
+                android:id="@+id/btn_search_classes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="openWeb"
+                android:text="@string/classes" />
+
+            <Button
+                android:id="@+id/btn_search_backgrpund"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="openWeb"
+                android:text="@string/background" />
+
+            <Button
+                android:id="@+id/btn_search_feats"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="openWeb"
+                android:text="@string/feats" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <Button
+                android:id="@+id/btn_search_items"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="openWeb"
+                android:text="@string/items" />
+
+            <Button
+                android:id="@+id/btn_search_speels"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="openWeb"
+                android:text="@string/spells" />
+
+            <Button
+                android:id="@+id/btn_search_monster"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="openWeb"
+                android:text="@string/monster" />
+
+            <Button
+                android:id="@+id/btn_search_fivee"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="openWeb"
+                android:text="@string/fivee" />
+        </LinearLayout>
+    </TableRow>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:orientation="vertical"
+        android:translationY="215dp">
+
+        <WebView
+            android:id="@+id/wview_search"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+</FrameLayout>
