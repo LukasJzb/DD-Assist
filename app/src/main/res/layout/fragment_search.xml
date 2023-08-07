@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CharFragment"
+    tools:context=".SearchFragment"
     android:background="@drawable/background">
 
     <TableRow
@@ -21,6 +21,7 @@
                 android:id="@+id/btn_search_rasse"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/whiteback"
                 android:onClick="openWeb"
                 android:text="@string/races" />
 
@@ -28,6 +29,7 @@
                 android:id="@+id/btn_search_classes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/whiteback"
                 android:onClick="openWeb"
                 android:text="@string/classes" />
 
@@ -35,6 +37,7 @@
                 android:id="@+id/btn_search_backgrpund"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/whiteback"
                 android:onClick="openWeb"
                 android:text="@string/background" />
 
@@ -42,6 +45,7 @@
                 android:id="@+id/btn_search_feats"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/whiteback"
                 android:onClick="openWeb"
                 android:text="@string/feats" />
         </LinearLayout>
@@ -56,12 +60,14 @@
                 android:id="@+id/btn_search_items"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/whiteback"
                 android:onClick="openWeb"
                 android:text="@string/items" />
 
             <Button
                 android:id="@+id/btn_search_speels"
                 android:layout_width="match_parent"
+                android:backgroundTint="@color/whiteback"
                 android:layout_height="wrap_content"
                 android:onClick="openWeb"
                 android:text="@string/spells" />
@@ -69,6 +75,7 @@
             <Button
                 android:id="@+id/btn_search_monster"
                 android:layout_width="match_parent"
+                android:backgroundTint="@color/whiteback"
                 android:layout_height="wrap_content"
                 android:onClick="openWeb"
                 android:text="@string/monster" />
@@ -76,6 +83,7 @@
             <Button
                 android:id="@+id/btn_search_fivee"
                 android:layout_width="match_parent"
+                android:backgroundTint="@color/whiteback"
                 android:layout_height="wrap_content"
                 android:onClick="openWeb"
                 android:text="@string/fivee" />
@@ -91,7 +99,7 @@
         <WebView
             android:id="@+id/wview_search"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"/>
     </LinearLayout>
 
 </FrameLayout>

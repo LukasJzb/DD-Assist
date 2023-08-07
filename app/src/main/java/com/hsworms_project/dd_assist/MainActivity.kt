@@ -17,7 +17,7 @@ import kotlin.random.Random
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    var wuerfel: Int = 0
+    private var wuerfel: Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -28,7 +28,9 @@ class MainActivity : AppCompatActivity() {
         navView.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.miHome -> replaceFragment(HomeFragment())
-                R.id.miSearch -> replaceFragment(CharFragment())
+                R.id.miSearch -> {
+                    replaceFragment(SearchFragment())
+                }
                 R.id.miNote -> replaceFragment(NoteFragment())
                 R.id.miDice -> {
                     replaceFragment(DiceFragment())
@@ -66,20 +68,24 @@ class MainActivity : AppCompatActivity() {
             }
         }
         else if(view == bt3) {
+            if(wuerfel < 50) {
             wuerfel += 1
+            }
         }
         else if(view == bt4) {
-            wuerfel += 5
+            if(wuerfel <=45) {
+                wuerfel += 5
+            }
         }
-        var massege: String = wuerfel.toString()
-        text.text = massege
+        val ausgabe: String = wuerfel.toString()
+        text.text = ausgabe
     }
 
-    var art = 0
+    private var art = 0
     fun roll (view: View) {
         val text = findViewById<TextView>(R.id.textView5)
-        val spinner: Spinner = findViewById<Spinner>(R.id.spinner2)
-        var dice = spinner.selectedItem.toString()
+        val spinner: Spinner = findViewById(R.id.spinner2)
+        val dice = spinner.selectedItem.toString()
         val stringBuilder = StringBuilder()
          when(dice){
              "d4" -> art = 4
@@ -98,7 +104,7 @@ class MainActivity : AppCompatActivity() {
             val ergebnis = (zufallsZahl % art) + 1
             sum += ergebnis
             if(i == wuerfel) {
-                stringBuilder.append("$ergebnis")
+                stringBuilder.append("$ergebnis\n")
             }
             else {
                 stringBuilder.append("$ergebnis, ")
@@ -108,6 +114,7 @@ class MainActivity : AppCompatActivity() {
         text.text = stringBuilder.toString()
     }
 
+    /*Funktionalität der WebSearch*/
     fun openWeb(view: View) {
         val rasse = findViewById<Button>(R.id.btn_search_rasse)
         val klasse = findViewById<Button>(R.id.btn_search_classes)
@@ -117,34 +124,34 @@ class MainActivity : AppCompatActivity() {
         val spell = findViewById<Button>(R.id.btn_search_speels)
         val monster = findViewById<Button>(R.id.btn_search_monster)
         val five = findViewById<Button>(R.id.btn_search_fivee)
-        val webView = findViewById<WebView>(R.id.wview_search)
+        val wView = findViewById<WebView>(R.id.wview_search)
 
-        webView.settings.javaScriptEnabled = true
-        webView.webViewClient = WebViewClient()
+        wView.settings.javaScriptEnabled = true
+        wView.webViewClient = WebViewClient()
 
         if (view == rasse) {
-            webView.loadUrl("https://5e.tools/races.html#aarakocra_dmg")
+            wView.loadUrl("https://5e.tools/races.html#aarakocra_dmg")
         }
         else if(view == klasse){
-            webView.loadUrl("https://5e.tools/classes.html#artificer_tce")
+            wView.loadUrl("https://5e.tools/classes.html#artificer_tce")
         }
         else if(view == backg) {
-            webView.loadUrl("https://5e.tools/backgrounds.html#acolyte_phb")
+            wView.loadUrl("https://5e.tools/backgrounds.html#acolyte_phb")
         }
         else if(view == feat) {
-            webView.loadUrl("https://5e.tools/feats.html#aberrant%20dragonmark_erlw")
+            wView.loadUrl("https://5e.tools/feats.html#aberrant%20dragonmark_erlw")
         }
         else if(view == item) {
-            webView.loadUrl("https://5e.tools/items.html#abacus_phb")
+            wView.loadUrl("https://5e.tools/items.html#abacus_phb")
         }
         else if(view == spell) {
-            webView.loadUrl("https://5e.tools/spells.html#absorb%20elements_xge")
+            wView.loadUrl("https://5e.tools/spells.html#absorb%20elements_xge")
         }
         else if(view == monster) {
-            webView.loadUrl("https://5e.tools/bestiary.html#aarakocra_mm")
+            wView.loadUrl("https://5e.tools/bestiary.html#aarakocra_mm")
         }
         else if(view == five) {
-            webView.loadUrl("https://5e.tools/")
+            wView.loadUrl("https://5e.tools/")
         }
     }
 }
