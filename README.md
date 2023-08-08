@@ -5,4 +5,4 @@ This is a project about a assistant for Dragons & Dungeons. It will be our unive
 Contributors:
 - Moritz Bayer inf3425 675749
 - Andreas Fischer inf3421 675745
-- Lukas Jarzombek
+- Lukas Jarzombek inf3448 675859
